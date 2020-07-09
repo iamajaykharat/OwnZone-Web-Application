@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+    <title>OwnZone</title>
+    <style>
+
+        /*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #444444;
+}
+
+a {
+  color: #85b0be;
+}
+
+a:hover {
+  color: #a6c6d0;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Raleway", sans-serif;
+}
+
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+#hero {
+  width: 100%;
+  height: 80vh;
+  background: url("/static/shop/hero-bg.jpg") top center;
+  background-size: cover;
+  position: relative;
+}
+
+#hero:before {
+  content: "";
+  background: rgba(5, 44, 63, 0.5);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#hero .hero-container {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 0 15px;
+}
+
+#hero h1 {
+  margin: 0 0 15px 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 56px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+#hero h2 {
+  color: #eee;
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+#hero .btn-get-started{
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  padding: 10px 28px;
+  border-radius: 4px;
+  transition: 0.5s;
+  border: 2px solid #85b0be;
+  color: #fff;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#hero .btn-get-started:hover {
+  background: #85b0be;
+  border: 2px solid #85b0be;
+}
+
+@media (min-width: 1024px) {
+  #hero {
+    background-attachment: fixed;
+  }
+}
+
+@media (max-width: 768px) {
+  #hero h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  #hero h2 {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Sections General
+--------------------------------------------------------------*/
+section {
+  padding: 80px 0;
+}
+
+.section-bg {
+  background-color: #f6f9fa;
+}
+
+.section-title {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.section-title h2 {
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 0;
+  color: #052c3f;
+}
+
+.section-title p {
+  margin-bottom: 0;
+}
+
+
+
+    </style>
+</head>
+<body>
+
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+    <div class="hero-container">
+        <h1>Welcome To OwnZone</h1>
+
+        <h2>You can shop here with our OwnZone-Shop. You can learn here with our OwnZone-Blog.</h2>
+        <div class="row">
+        <a href="/shop"  class="btn-get-started scrollto">OwnZone-Shop</a>
+        <a href="/blog"  class="btn-get-started scrollto">OwnZone-Blog</a>
+            </div>
+    </div>
+</section><!-- End Hero -->
+
+<!-- ======= Services Section ======= -->
+<section id="services" class="services section-bg">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Services</h2>
+            <p>OwnZone! This is your Zone</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 icon-box">
+                <div class="icon"><i class="icofont-computer"></i></div>
+                <h4 class="title"><a href="/shop">OwnZone-Shop</a></h4>
+                <p class="description">OwnZone! This is your Zone. You can shop your favourite items here. We will
+                    provide you the best quality service. Shop Now.</p>
+            </div>
+            <div class="col-lg-6 col-md-6 icon-box">
+                <div class="icon"><i class="icofont-chart-bar-graph"></i></div>
+                <h4 class="title"><a href="/blog">OwnZone-Blog</a></h4>
+                <p class="description">Surf! Whatever you want. This is a blog which will entertain you. Sports, News,
+                    Entertainment, Content, Article all is here. Visit Now.</p>
+            </div>
+
+        </div>
+
+    </div>
+</section><!-- End Services Section -->
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

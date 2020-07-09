@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    <title>Payment Page</title>
+    
+    <style>
+        footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: red;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">OwnZone</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/shop">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog">Blog</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Weldone! Your are just one step away!</strong> This is a demo payment page fill anything and click on
+        confirm.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-6 mt-4">
+                <div class="card">
+                    <div class="card-body p-5">
+                        <ul class="nav bg-light nav-pills rounded nav-fill mb-3" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="pill" href="#nav-tab-card">
+                                    <i class="fa fa-credit-card"></i> Credit Card</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="pill" href="#nav-tab-paypal">
+                                    <i class="fab fa-paypal"></i> Paypal</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="pill" href="#nav-tab-bank">
+                                    <i class="fa fa-university"></i> Bank Transfer</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="nav-tab-card">
+                                <p class="alert alert-success">OwnZone Payment Gateway</p>
+                                <form role="form">
+                                    <div class="form-group">
+                                        <label for="username">Full name (on the card)</label>
+                                        <input type="text" class="form-control" name="username" id="username"
+                                            placeholder="" required="">
+                                    </div> <!-- form-group.// -->
+
+                                    <div class="form-group">
+                                        <label for="cardNumber">Card number</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="cardNumber" name="cardNumber"
+                                                placeholder="">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text text-muted">
+                                                    <i class="fab fa-cc-visa"></i>   <i class="fab fa-cc-amex"></i>  
+                                                    <i class="fab fa-cc-mastercard"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div> <!-- form-group.// -->
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <div class="form-group">
+                                                <label><span class="hidden-xs">Expiration</span> </label>
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control" placeholder="MM" name="">
+                                                    <input type="number" class="form-control" placeholder="YY" name="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label data-toggle="tooltip" title=""
+                                                    data-original-title="3 digits code on back side of the card">CVV <i
+                                                        class="fa fa-question-circle"></i></label>
+                                                <input type="number" class="form-control" required="">
+                                            </div> <!-- form-group.// -->
+                                        </div>
+                                    </div> <!-- row.// -->
+                                    <a href="/shop/thankyou">
+                                        <button class="subscribe btn btn-primary btn-block" type="button">
+                                            Confirm</button>
+                                    </a>
+                                </form>
+                            </div> <!-- tab-pane.// -->
+                        </div> <!-- tab-content .// -->
+                    </div> <!-- card-body.// -->
+                </div> <!-- card.// -->
+            </div> <!-- col.// -->
+        </div> <!-- row.// -->
+        <!--container end.//-->
+        <!--  Footer  -->
+        <footer class="container-fluid bg-dark my-0 py-3 text-light">
+            <p class="mb-0 text-center">© 2020-2021 | OwnZone | Ajay Kharat</p>
+            <p class="mb-0 text-center">
+                <a href="#">Shop |</a>
+                <a href="#">Privacy |</a>
+                <a href="#">Terms</a>
+            </p>
+        </footer>
+
+    </div>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+
+        {% if thank %}
+        alert('Thank you for shopping with us! Your order id is {{id}}. Track your order.');
+        localStorage.clear();
+        document.location = "/shop";
+        {% endif %}
+
+    </script>
+</body>
+
+</html>

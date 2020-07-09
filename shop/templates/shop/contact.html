@@ -1,0 +1,89 @@
+{% extends 'shop/base.html' %}
+
+
+{% block title %} Contact {% endblock %}
+{% block css %}
+
+                footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: red;
+            color: white;
+            text-align: center;
+                }
+
+{% endblock %}
+{% block body %}
+<div class="container my-3">
+    <li class="list-group-item list-group-item-success text-center mb-2"><h2>Contact Us</h2></li>
+    <form class="needs-validation" novalidate action="/shop/contact/" method="post"> {% csrf_token %}
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Enter Your Name</label>
+            <input type="text" class="form-control" name="name" id="exampleFormControlInput1" placeholder="Your Name" required>
+            <div class="invalid-feedback">
+                Please Provide a Valid Name.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput2">Enter Your Email</label>
+            <input type="email" class="form-control" name="email" id="exampleFormControlInput2"
+                   placeholder="example@email.com" required>
+            <div class="invalid-feedback">
+                Please Provide a Valid Email.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput3">Enter Your Phone Number</label>
+            <input type="tel" class="form-control" name="phone" id="exampleFormControlInput3"
+                   placeholder="Your Phone Number" required>
+            <div class="invalid-feedback">
+                Please Provide a Valid Phone Number.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Query/Suggestion</label>
+            <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" placeholder="Your Feedback" rows="3" required></textarea>
+            <div class="invalid-feedback">
+                Please Provide Some Feedback .
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+    </form>
+
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+
+<!--Thank msg after form submission-->
+
+{% if thank %}
+    alert('Thank you for Contacting us! We will respond you as soon as possible.');
+    document.location = "/shop" ;
+{% endif %}
+
+<!--Example starter JavaScript for disabling form submissions if there are invalid fields-->
+
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+
+</script>
+{% endblock %}

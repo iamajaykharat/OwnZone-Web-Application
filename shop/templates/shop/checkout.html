@@ -1,0 +1,192 @@
+{% extends 'shop/base.html' %}
+{% block title %} Check-Out {% endblock %}
+{% block body %}
+
+
+<!-- Main Block -->
+<div class="container my-2">
+    <li class="list-group-item list-group-item-success text-center ">
+        <h3>Place Your Order</h3>
+    </li>
+
+    <div class="col my-2">
+        <li class="list-group-item list-group-item-info mb-2">
+            <h4>Step-1: Your Cart - Review Your Cart Items.</h4>
+        </li>
+        <ul class="list-group" id="items">
+        </ul>
+    </div>
+
+    <!-- Checkout Form -->
+    <div class="col my-2">
+        <li class="list-group-item list-group-item-info mb-2">
+            <h4>Step-2: Shipping Details - Fill Your Details
+                Here.</h4>
+        </li>
+
+        <form class="needs-validation" novalidate action="/shop/checkout/" method="post"> {% csrf_token %}
+
+            <input type="hidden" name="itemJson" id="itemJson">
+            <input type="hidden" name="amount" id="amount">
+            
+            <div class="form-row">               
+                <div class="form-group col-md-6">
+                    <label for="inputName">Name</label>
+                    <input type="text" name="name" class="form-control" id="inputName" placeholder="Your Name" required>
+                    <div class="invalid-feedback">
+                        Please Provide a Valid Name.
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputPhone">Phone</label>
+                    <input type="tel" name="phone" class="form-control" id="inputPhone" placeholder="Your Phone Number"
+                        required>
+                    <div class="invalid-feedback">
+                        Please Provide a Valid Phone Number.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail">Email</label>
+                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="example@email.com"
+                    required>
+                <div class="invalid-feedback">
+                    Please Provide a Valid Email.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputAddress">Address Line 1</label>
+                <input type="text" name="address1" class="form-control" id="inputAddress" placeholder="1234 Main St"
+                    required>
+                <div class="invalid-feedback">
+                    Please Provide a Valid Address.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputAddress2">Address Line 2</label>
+                <input type="text" name="address2" class="form-control" id="inputAddress2"
+                    placeholder="Apartment, studio, or floor">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">City</label>
+                    <input type="text" name="city" class="form-control" id="inputCity" placeholder="Your City" required>
+                    <div class="invalid-feedback">
+                        Please Provide a Valid City.
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputState">State</label>
+                    <input type="text" name="state" class="form-control" placeholder="Your State" id="inputState"
+                        required>
+                    <div class="invalid-feedback">
+                        Please Provide a Valid State.
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" name="zip_code" class="form-control" id="inputZip" placeholder="Zip Code"
+                        required>
+                    <div class="invalid-feedback">
+                        Please Provide a Valid Zip Code.
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-lg btn-block">Place Order</button>
+        </form>
+    </div>
+    <!-- End Checkout Form -->
+
+</div>
+<!-- End Main Block -->
+{% endblock %}
+
+<!-- Javascript and JQuery -->
+{% block js %}
+
+<!-- Locating cart in the localstorage   -->
+<script>
+    if (localStorage.getItem('cart') == null) {
+        var cart = {};
+    }
+    else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+    }
+
+    var sum = 0;
+    var total_bill = 0;
+    if ($.isEmptyObject(cart)) {
+        cartstr = ` <div class="card text-center">
+                    <div class="card-body">
+                    <h5 class="card-title">Oops!!! Your Cart is Empty!</h5>
+                    <p class="card-text">Add your favourite Items in your cart.</p>
+                    <a href="/shop" class="btn btn-primary">Shop Now</a>
+                    </div></div>`
+        $('#items').append(cartstr);
+    }
+
+    else {
+        var i = 1;
+        for (var item in cart) {
+            let name = cart[item][1];
+            let qty = cart[item][0];
+            let price = cart[item][2] * qty;
+
+            total_bill += price;
+            sum = sum + qty;
+            cartstr = `<li class="list-group-item d-flex justify-content-between align-items-center"><b>${i}.
+                ${name}</b>
+                <span class="badge badge-primary"><h6>Qty: ${qty} Item | Price: Rs.${price}</h6></span>
+            </li>`
+            $('#items').append(cartstr);
+            i = i + 1;
+        }
+        total = `<div class="alert alert-success" role="alert"><li class="list-group-item d-flex justify-content-between align-items-center">
+        <h3>Total Bill</h3>
+        <h3>  Rs.${total_bill}  </h3>
+        </li></div>`
+
+        $('#items').append(total);
+        $('#amount').val(total_bill);
+    }
+    document.getElementById('cart').innerHTML = sum;
+
+    $('#itemJson').val(JSON.stringify(cart));
+    {% if thank %}
+    alert('You are redirecting to the Payment Gateway! Your order id is {{id}}.You can Track your order using this id.');
+    localStorage.clear();
+    document.location = "/shop/demopayment";
+    {% endif %}
+
+
+    <!-- Example starter JavaScript for disabling form submissions if there are invalid fields -- >
+
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+        
+</script>
+
+{% endblock %}
+<!-- End JavaScript and JQuery -->

@@ -1,0 +1,162 @@
+{% extends 'shop/base.html' %}
+{% block title %} Order Tracker {% endblock %}
+{% block body %}
+
+<div class="container my-2">
+    <li class="list-group-item list-group-item-success text-center "><h3>Track Your Order</h3></li>
+
+    <div class="col my-2">
+        <li class="list-group-item list-group-item-info mb-2"><h4>Fill Your Order Details</h4></li>
+
+        <form class="needs-validation" novalidate id="trackerForm" method="post"> {% csrf_token %}
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputName">Order Id</label>
+                    <input type="number" name="order_id" class="form-control" id="inputName" placeholder="Your Order Id"
+                           required>
+                    <div class="invalid-feedback">
+                        Please Provide a Valid Order Id.
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" name="email" class="form-control" id="inputEmail"
+                           placeholder="example@email.com" required>
+                    <div class="invalid-feedback">
+                        Please Provide a Valid Email.
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-lg btn-block">Track Order Now</button>
+        </form>
+    </div>
+    <div class="col my-2">
+        <li class="list-group-item list-group-item-info mb-2"><h4>Your Order Status</h4></li>
+        <ul class="list-group" id="items">
+            <h6 class="text-center">Fill your order details above and Track your order.</h6>
+        </ul>
+    </div>
+    <div class="col my-2">
+        <li class="list-group-item list-group-item-info mb-2"><h4>Your Order Details</h4></li>
+        <ul class="list-group" id="citems">
+            <h6 class="text-center">Fill your order details above and Track your order.</h6>
+        </ul>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+
+    $('#trackerForm').submit(function(event){
+
+        $('#items').empty();
+        $('#citems').empty();
+        var formData = {
+            'order_id' : $('input[name=order_id]').val(),
+            'email' : $('input[name=email]').val(),
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/shop/tracker/',
+            data: formData,
+            encode: true
+        })
+
+        .done(function(data){
+            $('#citems').empty();
+            data = JSON.parse(data);
+
+            if ( data['status'] == 'success' )
+            {
+                updates = data['updates'];
+                for(i = 0;i < updates.length; i++)
+                {
+
+                    let text = updates[i]['text'];
+                    let time = updates[i]['time'];
+
+                    cartstr = `<li class="list-group-item d-flex justify-content-between align-items-center"><b>
+                        ${text}</b>
+                        <span class="badge badge-primary"><h6>Date: ${time}</h6></span>
+                    </li>`
+                    $('#items').append(cartstr);
+                }
+
+            <!--  Order Details in Tracker         -->
+
+                    cart = JSON.parse(data['itemJson']);
+                    var total_bill = 0;
+                    var i = 1;
+                    for ( var item in cart )
+                    {
+                        let name = cart[item][1];
+                        let qty = cart[item][0];
+                        let price = cart[item][2] * qty;
+                        total_bill += price;
+
+                        cartstr = `<li class="list-group-item d-flex justify-content-between align-items-center"><b>${i}.
+                        ${name}</b>
+                        <span class="badge badge-primary"><h6>Qty: ${qty} Item | Price: Rs.${price}</h6></span>
+                        </li>`
+                        $('#citems').append(cartstr);
+                        i = i + 1;
+                    }
+                        total = `<div class="alert alert-success" role="alert"><li class="list-group-item d-flex justify-content-between align-items-center">
+                        <h3>Total Bill</h3>
+                        <h3>  Rs.${total_bill}  </h3>
+                        </li></div>`
+                        $('#citems').append(total);
+
+
+                 }
+             else
+            {
+
+                 cartstr = `<div class="card text-center">
+                 <div class="card-body">
+                 <h5 class="card-title">Oops!!! Something went wrong</h5>
+                 <p class="card-text">Please fill your order details correctly.<br>If you don't have any order then shop now.</p>
+                 <a href="/shop" class="btn btn-primary">Shop Now</a>
+                 </div></div>`
+
+                 $('#items').append(cartstr);
+                 $('#citems').append(cartstr);
+            }
+
+          });
+
+        event.preventDefault();
+
+    });
+
+<!--Example starter JavaScript for disabling form submissions if there are invalid fields-->
+
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+
+</script>
+
+{% endblock %}

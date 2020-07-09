@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting</title>
+</head>
+<style>
+    body {
+        background: white;
+        }
+    .container{
+        background: black;
+        color: white;
+        border-radius: 1em;
+        padding: 1em;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%)
+    }
+
+</style>
+<body>
+<div class="container">
+    <h1>Redirecting you to secure payment page to complete payment....</h1>
+    <h1>Please do not refresh the page or do not click Back or Close button of your browser....</h1>
+    <form action="https://securegw-stage.paytm.in/theia/processTransaction" method="post" name="paytm">
+        {% for key, value in param_dict.items %}
+        <input type="hidden" name="{{key}}" value="{{value}}">
+        {% endfor %}
+    </form>
+</div>
+</body>
+<script>
+document.paytm.submit()
+</script>
+</html>

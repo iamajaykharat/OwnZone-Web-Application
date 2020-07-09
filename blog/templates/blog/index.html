@@ -1,0 +1,96 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}OwnZone Blog{% endblock %}
+
+{% block css %}
+.testimonials {
+padding: 80px 0;
+background: url("/static/shop/shop-bg.jpg") no-repeat;
+background-position: center center;
+background-size: cover;
+position: relative;
+}
+
+.testimonials::before {
+content: "";
+position: absolute;
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+background: rgba(0, 0, 0, 0.7);
+}
+
+.testimonials .section-header {
+margin-bottom: 40px;
+}
+
+.testimonials .testimonial-item {
+text-align: center;
+color: #fff;
+}
+
+h1 {
+
+font-size: 53px;
+
+}
+{% endblock %}
+
+
+{% block body %}
+
+<!--Testimonial-->
+<!-- ======= Testimonials Section ======= -->
+<section id="testimonials" class="testimonials">
+    <div class="container">
+        <div class="testimonial-item text-white">
+            <div class="container col-md-6 px-0">
+                <h1 class="display-5 font-weight-bold">Welcome to OwnZone</h1>
+                <p class="lead my-3 text-white font-weight-bold">Surf! Whatever You Want!</p>
+                <p class="lead mb-2">
+                <p>We will provide you Entertainment, News, Sports, Knowledge, Technology and much more only at one
+                    place.
+                    Visit us regularly. Follow us on social media.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Grid Items-->
+<div class="container my-5">
+    <div class="row mb-2">
+        {% for post in post %}
+        <div class="col-md-6">
+            <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+                <div class="card-body d-flex flex-column align-items-start">
+                    <strong class="d-inline-block mb-2 text-primary">India</strong>
+                    <h3 class="mb-0">
+                        <a class="text-dark" href="/blog/blogpost/{{post.post_id}}">{{post.title}}</a>
+                    </h3>
+                    <div class="mb-1 text-muted">{{post.pub_date}}</div>
+                    <ul class="card-text mb-auto">
+                        <li>
+                            <p class="card-text mb-auto">{{post.head1}}</p>
+                        </li>
+                        <li>
+                            <p class="card-text mb-auto">{{post.head2}}</p>
+                        </li>
+                        <li>
+                            <p class="card-text mb-auto">{{post.head3}}</p>
+                        </li>
+                    </ul>
+                    <a href="/blog/blogpost/{{post.post_id}}">Explore</a>
+                </div>
+                <img class="bd-placeholder-img card-img-right flex-auto d-none d-lg-block" width="200" height="250"
+                    src='/media/{{post.img}}'>
+            </div>
+            {% if forloop.counter|divisibleby:2 %}
+        </div>
+        <div class="row mb-2">
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

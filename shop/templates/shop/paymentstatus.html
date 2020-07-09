@@ -1,0 +1,24 @@
+{% extends 'shop/base.html' %}
+{% block title%}Payment Status{% endblock %}
+{% block body %}
+<div class="container">
+
+    <div class="col my-4">
+
+        <h2>Payment Status Regarding Your Order Id {{response.ORDERID}}</h2>
+        {% if response.RESPCODE == '01' %}
+<!--        <img src="shop/paymentsuccess.png" width="100" height="100">-->
+        <h1>Your Payment is Successful.</h1>
+        <h3>Thank You! Visit Again.</h3>
+        {% else %}
+<!--        <img src="shop/paymentfail.png" width="100" height="100">-->
+        <h1>Your Payment is Unsuccessful.</h1>
+        <h3>Please try again.</h3>
+        {% endif%}
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+</script>
+{% endblock %}
