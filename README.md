@@ -10,7 +10,7 @@ Some demo products for ecommerce web and demo content for blog is included in th
 ## Features of Project
 
 * Payment Gateway
-* Sign In and Sign Up System
+* Authentication System(Sign In and Sign Up System)
 * Order Tracker to track orders/products
 * Product Search System
 * Facebook like, share, comment System
